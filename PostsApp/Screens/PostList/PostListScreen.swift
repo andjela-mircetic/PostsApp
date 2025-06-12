@@ -28,6 +28,7 @@ struct PostListScreen: View {
                 }
             }
             .navigationTitle("Posts")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Create Post") {
