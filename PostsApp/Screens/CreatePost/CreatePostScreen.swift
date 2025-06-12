@@ -8,29 +8,40 @@
 import SwiftUI
 
 struct CreatePostScreen: View {
+    
+    struct Constants {
+        static let mainSpacing: CGFloat = 24
+        static let fieldSpacing: CGFloat = 8
+        static let textEditorHeight: CGFloat = 150
+        static let cornerRadius: CGFloat = 8
+        static let buttonCornerRadius: CGFloat = 10
+        static let buttonPadding: CGFloat = 16
+        static let mainPadding: CGFloat = 16
+    }
+    
     @StateObject var viewModel: CreatePostViewModel
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: Constants.mainSpacing) {
             
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: Constants.fieldSpacing) {
                 Text("Title")
                     .font(.headline)
                 TextField("Enter title", text: $viewModel.title)
                     .padding()
                     .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(8)
+                    .cornerRadius(Constants.cornerRadius)
             }
             
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: Constants.fieldSpacing) {
                 Text("Body")
                     .font(.headline)
                 TextEditor(text: $viewModel.body)
-                    .frame(height: 150)
+                    .frame(height: Constants.textEditorHeight)
                     .padding()
                     .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(8)
+                    .cornerRadius(Constants.cornerRadius)
             }
             
             Spacer()
@@ -51,15 +62,15 @@ struct CreatePostScreen: View {
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .padding()
+                        .padding(Constants.buttonPadding)
                         .background((viewModel.title.isEmpty || viewModel.body.isEmpty) ? Color.gray : Color.blue)
-                        .cornerRadius(10)
+                        .cornerRadius(Constants.buttonCornerRadius)
                 }
             }
             .disabled(viewModel.title.isEmpty || viewModel.body.isEmpty)
             
         }
-        .padding()
+        .padding(Constants.mainPadding)
         .navigationTitle("Create Post")
     }
 }
