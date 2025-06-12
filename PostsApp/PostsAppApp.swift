@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct PostsAppApp: App {
+    private let postService = PostService(client: DefaultAPIClient())
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PostListScreen(viewModel: PostsListViewModel(service: postService))
         }
     }
 }
